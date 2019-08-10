@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import { API_KEY } from '../../../keys/index';
+import { NewsWrapper } from './Elements';
+import { FiClock } from 'react-icons/fi';
 
 class News extends Component {
     state = { news: [] }
@@ -21,20 +23,24 @@ class News extends Component {
         return (
             <div>
                 <h3>Related news</h3>
-                <ul>
-                    {
-                        this.state.news.map((item) => {
-                            return (<li key={item.id}>
-                                <a href={item.url} target="_blank" rel="noopener noreferrer">
-                                    <div>{item.publication_date}</div>
-                                    <h5>{item.title}</h5>
-                                    <p>{item.summary}</p>
-                                </a>
-                            </li>
-                            )
-                        })
-                    }
-                </ul>
+                <NewsWrapper>
+                    <ul>
+                        {
+                            this.state.news.map((item) => {
+                                return (<li key={item.id}>
+                                    <a href={item.url} target="_blank" rel="noopener noreferrer">
+
+                                        <h5>{item.title}</h5>
+                                        <div><FiClock stroke="#4CAF50" /> {new Date(item.publication_date).toLocaleDateString()}</div>
+                                        <p>{item.summary.slice(0, 300) + '...'}</p>
+                                    </a>
+                                </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </NewsWrapper>
+
             </div>
         )
     }

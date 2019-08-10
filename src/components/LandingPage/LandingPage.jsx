@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCompanies } from '../../store/actions/companiesActions';
+import { Card, CardParent, Loading, ErrorCard } from '../../Elements';
 
 class LandingPage extends Component {
     state = { companies: [] }
@@ -22,23 +23,26 @@ class LandingPage extends Component {
     render() {
         const { error, pending, errMsg } = this.props;
         if (error) {
-            return <div>Error message: {errMsg} </div>
+            return <ErrorCard>Error message: {errMsg} </ErrorCard>
         } else if (pending) {
-            return <div>Loading ...</div>
+            return <Loading><div></div> Loading ...</Loading>
         } else {
             return (
                 <div>
-                    <h2>Landing Page</h2>
+                    <h2>Popular Companies</h2>
 
-                    <ul>
+                    <CardParent>
                         {this.props.companies.slice(0, 10).map((item, index) => {
                             return (
-                                <li key={index}>
-                                    <Link to={`/companies/${item.ticker}`}>{item.name}</Link>
-                                </li>
+                                <Card key={index}>
+                                    <Link to={`/companies/${item.ticker}`}>
+                                        <h5>{item.name}</h5>
+                                        <p><b>Close</b>: N/A | <b>Open</b>: N/A | <b>Heigh</b>: N/A</p>
+                                    </Link>
+                                </Card>
                             )
                         })}
-                    </ul>
+                    </CardParent>
 
                 </div>
             )

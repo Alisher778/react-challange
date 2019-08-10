@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import debounce from 'loadsh/debounce';
 import { fetchCompanies } from '../../store/actions/companiesActions';
+import { Card, CardParent, Loading, ErrorCard, Search } from '../../Elements';
 
 
 class LandingPage extends Component {
@@ -41,29 +42,31 @@ class LandingPage extends Component {
         const { error, pending } = this.props;
 
         if (error) {
-            return <h2>Error</h2>
+            return <ErrorCard>Error message: {error} </ErrorCard>
         } else if (pending) {
-            return <h2>Loading ....</h2>
+            return <Loading><div></div> Loading ...</Loading>
         } else {
             return (
                 <div>
                     <h2>Companies Page</h2>
-                    <input
+                    <Search
                         type="text"
                         ref={ref => this.searchRef = ref}
                         onChange={this.filterhandler}
+                        margin="auto"
+                        width="70%"
                     />
-                    <ul>
+                    <CardParent>
                         {
                             this.state.companies.map((item, index) => {
                                 return (
-                                    <li key={index}>
+                                    <Card key={index}>
                                         <Link to={`/companies/${item.ticker}`}>{item.name}</Link>
-                                    </li>
+                                    </Card>
                                 )
                             })
                         }
-                    </ul>
+                    </CardParent>
 
                 </div>
             )

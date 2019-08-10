@@ -5,21 +5,23 @@ import ShowCompany from './Companies/ShowCompany/ShowCompany';
 import Header from './Header/Header';
 import LandingPage from './LandingPage/LandingPage';
 import Search from './Search/Search';
+import { Main } from '../Elements';
 
 
 class App extends Component {
     render() {
         return (
             <HashRouter>
-                <div>
-                    <Header />
+
+                <Header />
+                <Main>
                     <Switch>
                         <Route path="/" exact component={LandingPage} />
                         <Route path="/companies" exact component={Companies} />
                         <Route path="/companies/:ticker" exact component={ShowCompany} />
                         <Route path="/search" exact component={Search} />
                     </Switch>
-                </div>
+                </Main>
             </HashRouter>
 
         )

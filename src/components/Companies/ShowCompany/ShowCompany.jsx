@@ -5,6 +5,8 @@ import { fetchSelectedCompanyDetails } from '../../../store/actions/companiesAct
 import Descriptions from './CompanyDescription';
 import Comments from './Comments';
 import News from './News';
+import { Wrapper } from './Elements';
+
 
 class ShowCompany extends Component {
     state = { notFound: false }
@@ -25,36 +27,42 @@ class ShowCompany extends Component {
         } else {
             return (
                 <div>
-                    <h2>{selectedCompany.ticker} - {selectedCompany.name}</h2>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Leagal name:</th>
-                                <td>{selectedCompany.legal_name}</td>
-                            </tr>
-                            <tr>
-                                <th>Stock Exchange:</th>
-                                <td>{selectedCompany.stock_exchange}</td>
-                            </tr>
-                            <tr>
-                                <th>CEO:</th>
-                                <td>{selectedCompany.ceo}</td>
-                            </tr>
-                            <tr>
-                                <th>Entity Status:</th>
-                                <td>{selectedCompany.entity_status}</td>
-                            </tr>
-                            <tr>
-                                <th>Country:</th>
-                                <td>{selectedCompany.hq_country}</td>
-                            </tr>
-                            <tr>
-                                <th>Sectors:</th>
-                                <td>{selectedCompany.sector}</td>
-                            </tr>
-                        </tbody>
+                    <Wrapper align="center">
+                        <h2>{selectedCompany.ticker} - {selectedCompany.name}</h2>
+                    </Wrapper>
+                    <Wrapper align="left">
 
-                    </table>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>Leagal name:</th>
+                                    <td>{selectedCompany.legal_name}</td>
+                                </tr>
+                                <tr>
+                                    <th>Stock Exchange:</th>
+                                    <td>{selectedCompany.stock_exchange}</td>
+                                </tr>
+                                <tr>
+                                    <th>CEO:</th>
+                                    <td>{selectedCompany.ceo}</td>
+                                </tr>
+                                <tr>
+                                    <th>Entity Status:</th>
+                                    <td>{selectedCompany.entity_status}</td>
+                                </tr>
+                                <tr>
+                                    <th>Country:</th>
+                                    <td>{selectedCompany.hq_country}</td>
+                                </tr>
+                                <tr>
+                                    <th>Sectors:</th>
+                                    <td>{selectedCompany.sector}</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </Wrapper>
                     <Descriptions short={selectedCompany.short_description} long={selectedCompany.long_description} />
                     <Comments id={selectedCompany.ticker} />
                     <News id={selectedCompany.ticker} />

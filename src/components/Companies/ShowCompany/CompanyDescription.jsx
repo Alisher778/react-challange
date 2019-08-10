@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Wrapper } from './Elements';
+import { Button } from '../../../Elements';
 
 function Description(props) {
     // Declare a new state variable, which we'll call "count"
@@ -11,13 +13,18 @@ function Description(props) {
             <h4>Discription</h4>
             <div style={{ display: show === false ? 'block' : 'none' }}>
                 <p>{props.short}</p>
-                <button onClick={() => setShow(true)}>Read Less</button>
+
+                <Wrapper>
+                    <Button width="120px" fontSize="16px;" onClick={() => setShow(true)}>Read Less</Button>
+                </Wrapper>
             </div>
 
             <div style={{ display: show === true ? 'block' : 'none' }}>
 
                 <p>{props.long}</p>
-                <button onClick={() => setShow(false)}>Read More</button>
+                <Wrapper>
+                    <Button width="120px" fontSize="16px;" onClick={() => setShow(false)}>Read More</Button>
+                </Wrapper>
             </div>
 
 

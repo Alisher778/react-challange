@@ -1,18 +1,19 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { HeaderElement, List, Ul, Nav } from './element';
 
 const Header = (props) => {
     return (
-        <header>
-            <nav>
+        <HeaderElement>
+            <Nav>
                 <Link to="/">SABAL</Link>
-                <ul>
-                    <li><NavLink to="/" activeStyle={{ color: 'red' }} exact>HOME</NavLink></li>
-                    <li><NavLink to="/companies" activeStyle={{ color: 'red' }} exact>Companies</NavLink></li>
-                    <li><NavLink to="/search" activeStyle={{ color: 'red' }} exact>Search</NavLink></li>
-                </ul>
-            </nav>
-        </header>
+                <Ul>
+                    <List><NavLink to="/" activeStyle={{ color: '#ffc107' }} exact>HOME</NavLink></List>
+                    <List><NavLink to="/companies" activeStyle={{ color: '#ffc107' }}>Companies</NavLink></List>
+                    <List><NavLink to="/search" activeStyle={{ color: '#ffc107' }} exact>Search</NavLink></List>
+                </Ul>
+            </Nav>
+        </HeaderElement>
     )
 }
 

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createComment } from '../../../store/actions/commentsActions';
+import { Comment, InputField } from './Elements';
+import { Dflex } from '../../../Elements';
+import { FiUser } from 'react-icons/fi';
+
 
 class Comments extends Component {
     state = {
@@ -80,17 +84,23 @@ class Comments extends Component {
                     {
                         this.state.comments.map((item, index) => {
                             return (
-                                <li key={item.id}>
-                                    <h5>{item.name}</h5>
-                                    <p>{item.comment}</p>
-                                </li>
+                                <Comment>
+                                    <Dflex key={item.id || index}>
+                                        <FiUser size="30" />
+                                        <Comment>
+                                            <h5>{item.name}</h5>
+                                            <p>{item.comment}</p>
+                                        </Comment>
+
+                                    </Dflex>
+                                </Comment>
                             )
                         })
                     }
                 </ul>
 
                 <form onSubmit={this.formHandler}>
-                    <div>
+                    <InputField>
                         <label htmlFor="name">Name</label>
                         <input
                             type="text"
@@ -99,8 +109,8 @@ class Comments extends Component {
                             value={this.state.name}
                             ref={ref => this.nameRef = ref}
                         />
-                    </div>
-                    <div>
+                    </InputField>
+                    <InputField>
                         <label htmlFor="name">Comment</label>
                         <textarea
                             name="comment"
@@ -109,8 +119,10 @@ class Comments extends Component {
                             ref={ref => this.commentRef = ref}
                             value={this.state.comment}
                         ></textarea>
-                    </div>
-                    <button>Create Comment</button>
+                    </InputField>
+                    <InputField>
+                        <button>Create Comment</button>
+                    </InputField>
                 </form>
             </div>
         )
