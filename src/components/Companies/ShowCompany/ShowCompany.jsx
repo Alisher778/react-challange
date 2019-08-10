@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchSelectedCompanyDetails } from '../../../store/actions/companiesActions';
 import Descriptions from './CompanyDescription';
+import Comments from './Comments';
+import News from './News';
 
 class ShowCompany extends Component {
     state = { notFound: false }
@@ -11,6 +13,7 @@ class ShowCompany extends Component {
         const { ticker } = this.props.match.params;
         this.props.fetchSelectedCompanyDetails(ticker);
     }
+
     render() {
         const { error, pending, selectedCompany } = this.props;
 
@@ -53,6 +56,8 @@ class ShowCompany extends Component {
 
                     </table>
                     <Descriptions short={selectedCompany.short_description} long={selectedCompany.long_description} />
+                    <Comments id={selectedCompany.ticker} />
+                    <News id={selectedCompany.ticker} />
                 </div>
             )
         }
