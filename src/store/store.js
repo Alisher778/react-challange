@@ -1,12 +1,18 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import persistState from 'redux-localstorage'
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import companiesReducer from './reducers/companiesReducer';
+import { companyReducer, selectedCompanyReducer } from './reducers/companiesReducer';
 
+const enhancer = compose(
+    applyMiddleware(thunk, logger),
+    persistState(),
+)
 const reducers = combineReducers({
-    companies: companiesReducer
+    companies: companyReducer,
+    selectedCompany: selectedCompanyReducer
 });
 
-const store = createStore(reducers, applyMiddleware(thunk, logger));
+const store = createStore(reducers, enhancer);
 
 export default store;

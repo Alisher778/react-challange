@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCompanies } from '../../store/actions/companiesActions';
 
 class LandingPage extends Component {
+    state = { companies: [] }
     componentDidMount() {
         //fetch 10 companies list
-        this.props.fetchCompanies()
+        this.props.fetchCompanies();
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.companies !== this.props.companies) {
+            console.log('Updated');
+
+            return this.setState({ companies: this.props.companies });
+        }
+    }
 
     render() {
         const { error, pending, errMsg } = this.props;
@@ -19,11 +29,30 @@ class LandingPage extends Component {
             return (
                 <div>
                     <h2>Landing Page</h2>
+
+                    <ul>
+                        {this.props.companies.map((item, index) => {
+                            return (
+                                <li key={index}>
+                                    <Link to={`/companies/${item.ticker}`}>{item.name}</Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+
                 </div>
             )
         }
 
     }
+}
+
+LandingPage.propTypes = {
+    companies: PropTypes.array,
+}
+
+LandingPage.defaultProps = {
+    companies: []
 }
 
 const mapStateToProps = state => {
