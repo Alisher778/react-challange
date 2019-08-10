@@ -31,7 +31,7 @@ class LandingPage extends Component {
                     <h2>Landing Page</h2>
 
                     <ul>
-                        {this.props.companies.map((item, index) => {
+                        {this.props.companies.slice(0, 10).map((item, index) => {
                             return (
                                 <li key={index}>
                                     <Link to={`/companies/${item.ticker}`}>{item.name}</Link>

@@ -37,16 +37,6 @@ const companyReducer = (state = initialState, action) => {
                 errMsg: ''
             }
         }
-        case SELECTED_COMPANY: {
-            return {
-                ...state,
-                companies: [],
-                pending: false,
-                error: null,
-                errMsg: '',
-                selectedCompany: { ...action.data }
-            }
-        }
         default: {
             return state
         }

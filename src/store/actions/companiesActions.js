@@ -35,7 +35,7 @@ export const fetchCompanies = () => {
         return Axios
             .get(companiesUrl)
             .then(res => {
-                const data = res.data.data.slice(0, 10);
+                const data = res.data.data;
                 return dispach(fetchSuccess(data))
             })
             .catch(err => {
