@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createComment } from '../../../store/actions/commentsActions';
 import { Comment, InputField } from './Elements';
-import { Dflex } from '../../../Elements';
+import { Dflex } from '../../../styles';
 import { FiUser } from 'react-icons/fi';
 
 

@@ -5,7 +5,7 @@ import ShowCompany from './Companies/ShowCompany/ShowCompany';
 import Header from './Header/Header';
 import LandingPage from './LandingPage/LandingPage';
 import Search from './Search/Search';
-import { Main } from '../Elements';
+import { Main } from '../styles';
 
 
 class App extends Component {

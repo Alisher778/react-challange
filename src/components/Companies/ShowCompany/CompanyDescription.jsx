@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Wrapper } from './Elements';
-import { Button } from '../../../Elements';
+import { Button } from '../../../styles/index';
 
 function Description(props) {
     // Declare a new state variable, which we'll call "count"

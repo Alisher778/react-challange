@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { API_KEY } from '../../keys';
 import Axios from 'axios';
-import { Search, Dflex, Button, CardParent, Card } from '../../Elements/index';
+import { Search, Dflex, Button, CardParent, Card } from '../../styles/index';
 
 
 class LandingPage extends Component {

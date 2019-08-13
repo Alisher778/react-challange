@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCompanies } from '../../store/actions/companiesActions';
-import { Card, CardParent, Loading, ErrorCard } from '../../Elements';
+import { Card, CardParent, Loading, ErrorCard } from '../../styles';
 
 class LandingPage extends Component {
     state = { companies: [] }

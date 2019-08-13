@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import debounce from 'loadsh/debounce';
 import { fetchCompanies } from '../../store/actions/companiesActions';
-import { Card, CardParent, Loading, ErrorCard, Search } from '../../Elements';
+import { Card, CardParent, Loading, ErrorCard, Search } from '../../styles';
 
 
 class LandingPage extends Component {
