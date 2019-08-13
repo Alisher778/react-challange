@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-   text-align: ${props => props.align}
-`
+   text-align: ${(props) => props.align}
+`;
 const InputField = styled.div`
    display: flex;
    align-items: flex-start;
@@ -35,7 +35,7 @@ const InputField = styled.div`
     font-size: 16px;
     padding: 5px 10px;
    }
-`
+`;
 
 
 const Comment = styled.div`
@@ -51,7 +51,7 @@ const Comment = styled.div`
    li{
       list-style-type: none;
    }
-`
+`;
 
 const NewsWrapper = styled.div`
    a {
@@ -77,6 +77,8 @@ const NewsWrapper = styled.div`
       font-size: 14px;
    }
 
-`
+`;
 
-export { Wrapper, InputField, Comment, NewsWrapper };
+export {
+  Wrapper, InputField, Comment, NewsWrapper,
+};

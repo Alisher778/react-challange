@@ -30,7 +30,6 @@ class LandingPage extends Component {
             return (
                 <div>
                     <h2>Popular Companies</h2>
-
                     <CardParent>
                         {this.props.companies.slice(0, 10).map((item, index) => {
                             return (
@@ -43,7 +42,6 @@ class LandingPage extends Component {
                             )
                         })}
                     </CardParent>
-
                 </div>
             )
         }

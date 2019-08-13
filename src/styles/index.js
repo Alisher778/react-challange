@@ -7,11 +7,11 @@ const Main = styled.main`
   width: 90%;
   margin: 0 auto;
   max-width: 1200px;
-`
+`;
 
 const List = styled.li`
   list-style-type: none;
-`
+`;
 
 const CardParent = styled.ul`
   display: flex;
@@ -19,7 +19,7 @@ const CardParent = styled.ul`
   align-items: center;
   justify-content: space-between;
   padding: 0;
-`
+`;
 
 const Card = styled.li`
     list-style: none;
@@ -67,7 +67,7 @@ const Card = styled.li`
         width: calc(100% - 14px);
       }
     }
-`
+`;
 
 const Loading = styled.div`
   @keyframes loading {
@@ -92,7 +92,7 @@ const Loading = styled.div`
     animation: loading 1s infinite linear forwards;
     margin-right: 10px;
   }
-`
+`;
 
 const ErrorCard = styled.div`
    min-height: calc(100vh - 70px);
@@ -101,33 +101,35 @@ const ErrorCard = styled.div`
   align-items: center;
   justify-content: center;
   color: #E91E63;
-`
+`;
 
 const Search = styled.input`
     display: block;
-    width: ${props => props.width};
+    width: ${(props) => props.width};
     height: 40px;
     font-size: 25px;
     padding: 3px 10px;
-    margin: ${props => props.margin};
+    margin: ${(props) => props.margin};
     border-radius: 4px;
     border: 1px solid #7e4ed6;
     outline: none;
     box-shadow: none;
-`
+`;
 const Button = styled.button`
     height: 40px;
-    width: ${props => props.width || '92px'};
+    width: ${(props) => props.width || '92px'};
     border-radius: 4px;
-    font-size: ${props => props.fontSize || '20px'};
+    font-size: ${(props) => props.fontSize || '20px'};
     background: #4CAF50;
     color: #fff;
     border: 1px solid;
 
-`
+`;
 const Dflex = styled.div`
    display: flex;
    align-items: center;
-   justify-content: ${props => props.position};
-`
-export { Main, List, Card, CardParent, Loading, ErrorCard, Search, Dflex, Button };
+   justify-content: ${(props) => props.position};
+`;
+export {
+  Main, List, Card, CardParent, Loading, ErrorCard, Search, Dflex, Button,
+};

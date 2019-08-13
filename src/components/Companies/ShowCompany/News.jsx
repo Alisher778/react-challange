@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { API_KEY } from '../../../keys/index';
+import API_KEY from '../../../configs/keys/index';
 import { NewsWrapper } from './Elements';
 import { FiClock } from 'react-icons/fi';
 

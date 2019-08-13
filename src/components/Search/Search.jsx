@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { API_KEY } from '../../keys';
+import API_KEY from '../../configs/keys';
 import Axios from 'axios';
 import { Search, Dflex, Button, CardParent, Card } from '../../styles/index';
 
@@ -24,8 +24,6 @@ class LandingPage extends Component {
     }
 
     render() {
-        console.log(this.state);
-
         return (
             <div>
                 <h2>Search Page</h2>
@@ -35,7 +33,6 @@ class LandingPage extends Component {
                         type="text"
                         onChange={(e) => this.setState({ query: e.target.value })}
                     />
-
                     <Button onClick={this.searchHandler}>Search</Button>
                 </Dflex>
 
@@ -53,8 +50,6 @@ class LandingPage extends Component {
                             )
                     }
                 </CardParent>
-
-
             </div>
         )
     }

@@ -1,8 +1,8 @@
 import { CREATE_COMMENT } from './actionTypes';
 
-export const createComment = (data) => {
-    return {
-        type: CREATE_COMMENT,
-        data
-    }
-}
+const createComment = (data) => ({
+  type: CREATE_COMMENT,
+  data,
+});
+
+export default createComment;

@@ -5,6 +5,8 @@ module.exports = {
   },
   extends: [
     'airbnb',
+    "eslint:recommended",
+    "plugin:react/recommended"
   ],
   globals: {
     Atomics: 'readonly',
@@ -14,6 +16,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
+    "parser": "babel-eslint",
     ecmaVersion: 2018,
     sourceType: 'module',
   },
