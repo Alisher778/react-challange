@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { searchCompany } from '../../store/actions/searchActions';
-import { Search, Dflex, Button, CardParent, Card } from '../../styles/index';
+import { Dflex, Button, CardParent, Card } from '../../styles/index';
+import { Search, Container } from './styles';
 import ErrorMsg from '../UI/ErrorMsg';
 import Pending from '../UI/Pending';
 
@@ -22,17 +23,19 @@ class SearchPage extends Component {
 
     render() {
         const { error, pending, search, errMsg } = this.props.search;
+        console.log(pending);
+
         if (error) {
             return <ErrorMsg error={errMsg} />
         } else {
             return (
-                <div>
+                <Container>
                     {pending && <Pending />}
-                    <h2>Search Page</h2>
                     <Dflex position="center">
                         <Search
                             width="70%"
                             type="text"
+                            placeholder="Search company"
                             onChange={(e) => this.setState({ query: e.target.value })}
                         />
                         <Button onClick={this.searchHandler}>Search</Button>
@@ -49,7 +52,7 @@ class SearchPage extends Component {
 
                         }
                     </CardParent>
-                </div>
+                </Container>
             )
         }
 

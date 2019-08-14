@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import debounce from 'loadsh/debounce';
 import { fetchCompanies } from '../../store/actions/companiesActions';
-import { Card, CardParent, Loading, Search } from '../../styles';
+import { Card, CardParent, Headding } from '../../styles';
+import { Search, Container } from './styles';
 import ErrorMsg from '../UI/ErrorMsg';
 import Pending from '../UI/Pending';
 
@@ -49,12 +50,13 @@ class LandingPage extends Component {
             return <Pending />
         } else {
             return (
-                <div>
-                    <h2>Companies Page</h2>
+                <Container>
+                    <Headding>All Companies</Headding>
                     <Search
                         type="text"
                         ref={ref => this.searchRef = ref}
                         onChange={this.filterhandler}
+                        placeholder="Filter companies"
                         margin="auto"
                         width="70%"
                     />
@@ -70,7 +72,7 @@ class LandingPage extends Component {
                         }
                     </CardParent>
 
-                </div>
+                </Container>
             )
         }
     }

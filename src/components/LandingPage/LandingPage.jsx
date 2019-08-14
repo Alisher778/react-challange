@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchCompanies } from '../../store/actions/companiesActions';
-import { Card, CardParent, Loading, ErrorCard } from '../../styles';
+import { Card, CardParent, Loading, ErrorCard, Headding } from '../../styles';
 
 class LandingPage extends Component {
     state = { companies: [] }
@@ -29,11 +29,11 @@ class LandingPage extends Component {
         } else {
             return (
                 <div>
-                    <h2>Popular Companies</h2>
+                    <Headding>Top 10 Companies</Headding>
                     <CardParent>
                         {this.props.companies.slice(0, 10).map((item, index) => {
                             return (
-                                <Card key={index}>
+                                <Card key={index} fDirection="column">
                                     <Link to={`/companies/${item.ticker}`}>
                                         <h5>{item.name}</h5>
                                         <p><b>Close</b>: N/A | <b>Open</b>: N/A | <b>Heigh</b>: N/A</p>

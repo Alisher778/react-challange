@@ -5,11 +5,11 @@ import API_KEY from '../../configs/keys';
 const companiesUrl = `https://api-v2.intrinio.com/companies/search?api_key=${API_KEY}&query=`;
 
 export const fetchPending = () => ({
-  type: actionTypes.FETCH_PENDING,
+  type: actionTypes.SEARCH_COMPANY_PENDING,
 });
 
 export const fetchError = (error) => ({
-  type: actionTypes.FETCH_ERROR,
+  type: actionTypes.SEARCH_COMPANY_ERROR,
   error,
 });
 

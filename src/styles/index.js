@@ -9,6 +9,24 @@ const Main = styled.main`
   max-width: 1200px;
 `;
 
+const Headding = styled.h2`
+   position: relative;
+   top: 0;
+   left: 0;
+   margin-bottom: 30px;
+   padding-left: 12px;
+   line-height: 2;
+
+   &::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 3px;
+     height: 100%;
+     background: #6a44c2;
+   }
+`;
 const List = styled.li`
   list-style-type: none;
 `;
@@ -34,17 +52,21 @@ const Card = styled.li`
     text-align: center;
     a {
       padding: 4px;
-      display: block;
+      display: flex;
+      flex-direction: ${(props) => props.fDirection || 'row'};
+      align-items: ${(props) => props.alignItems || 'center'};
+      justify-content: center;
+      width: 100%;
+      height: 100%;
       color: #000;
       text-decoration: none;
-
-      p {
+    }
+    p {
         font-size: 10px;
-        b{
+      }
+    b{
           color: #3f51b5;
         }
-      }
-    }
 
 
     @media (max-width: 991px) {
@@ -75,22 +97,28 @@ const Loading = styled.div`
     to {transform: rotate(360deg)}
   }
 
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   min-height: calc(100vh - 70px);
-  width: 100%;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(76, 175, 80, 0.12);
 
   div {
     width: 50px;
     height: 50px;
+    margin-right: 10px;
     border-radius: 50%;
     border-width: 10px;
     border-style: solid;
     border-color: rgba(76, 175, 80, 0.41); 
     border-bottom-color: #4caf50;
     animation: loading 1s infinite linear forwards;
-    margin-right: 10px;
   }
 `;
 
@@ -103,18 +131,7 @@ const ErrorCard = styled.div`
   color: #E91E63;
 `;
 
-const Search = styled.input`
-    display: block;
-    width: ${(props) => props.width};
-    height: 40px;
-    font-size: 25px;
-    padding: 3px 10px;
-    margin: ${(props) => props.margin};
-    border-radius: 4px;
-    border: 1px solid #7e4ed6;
-    outline: none;
-    box-shadow: none;
-`;
+
 const Button = styled.button`
     height: 40px;
     width: ${(props) => props.width || '92px'};
@@ -130,6 +147,15 @@ const Dflex = styled.div`
    align-items: center;
    justify-content: ${(props) => props.position};
 `;
+
 export {
-  Main, List, Card, CardParent, Loading, ErrorCard, Search, Dflex, Button,
+  Main,
+  Headding,
+  List,
+  Card,
+  CardParent,
+  Loading,
+  ErrorCard,
+  Dflex,
+  Button,
 };

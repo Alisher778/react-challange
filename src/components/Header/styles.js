@@ -14,7 +14,7 @@ const HeaderElement = styled.header`
         color: #fff;
         text-decoration: none;
     }
-`
+`;
 
 const List = styled.li`
     list-style-type: none;
@@ -27,22 +27,23 @@ const List = styled.li`
             color: #fff;
         }
     }
+`;
 
-
-   
-`
 const Ul = styled.ul`
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: auto;
-`
+`;
+
 const Nav = styled.nav`
   width: 90%;
   margin: 0 auto;
   display: flex;
     align-items: center;
     justify-content: center;
-`
+`;
 
-export { HeaderElement, List, Ul, Nav };
+export {
+  HeaderElement, List, Ul, Nav,
+};
