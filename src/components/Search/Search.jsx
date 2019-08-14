@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { searchCompany } from '../../store/actions/searchActions';
 import { Dflex, Button, CardParent, Card } from '../../styles/index';
 import { Search, Container, Result } from './styles';
+import API_KEY from '../../configs/keys';
 import ErrorMsg from '../UI/ErrorMsg';
 import Pending from '../UI/Pending';
+import Axios from 'axios';
 
+const searchUrl = `https://api-v2.intrinio.com/companies/search?api_key=${API_KEY}&query=`;
 
 class SearchPage extends Component {
-    state = { query: '', data: [] }
+    state = { query: '', data: [], pending: false }
 
     searchHandler = () => {
-        this.props.searchCompany(this.state.query);
+        this.setState({ pending: true });
+        Axios
+            .get(searchUrl + this.state.query)
+            .then((res) => {
+                const { data: { companies } } = res;
+                if (companies.length === 0) {
+                    return this.setState({ data: [{ name: 'No company found', id: 'notFound' }], pending: false });
+                }
+                return this.setState({ data: companies, pending: false });
+            })
+            .catch((err) => this.setState({ error: true, errMsg: err.message }));
     }
-
-    componentDidUpdate(prevProps) {
-        if (prevProps.search.search !== this.props.search.search) {
-            return this.setState({ data: this.props.search.search });
-        }
-    }
-
-    componentWillUnmount() {
-        return window.localStorage.clear();
-    }
-
 
     render() {
-        const { error, pending, search, errMsg } = this.props.search;
+        const { error, pending, errMsg, data } = this.state;
         if (error) {
             return <ErrorMsg error={errMsg} />
         } else {
@@ -46,9 +46,8 @@ class SearchPage extends Component {
 
                     <CardParent>
                         {
-                            search &&
                             (
-                                this.state.data.map(item => {
+                                data.map(item => {
                                     if (item.id !== 'notFound') {
                                         return <Card key={item.id}><Link to={`/companies/${item.ticker}`}>{item.name}</Link></Card>
 
@@ -67,16 +66,4 @@ class SearchPage extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        search: state.search
-    }
-}
-
-const mapdispachToProps = dispach => {
-    return {
-        searchCompany: (query) => dispach(searchCompany(query))
-    }
-}
-
-export default connect(mapStateToProps, mapdispachToProps)(SearchPage);
+export default SearchPage;
