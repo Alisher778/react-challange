@@ -1,58 +1,71 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import API_KEY from '../../configs/keys';
-import Axios from 'axios';
+import { searchCompany } from '../../store/actions/searchActions';
 import { Search, Dflex, Button, CardParent, Card } from '../../styles/index';
+import ErrorMsg from '../UI/ErrorMsg';
+import Pending from '../UI/Pending';
 
 
-class LandingPage extends Component {
+class SearchPage extends Component {
     state = { query: '', data: [] }
 
     searchHandler = () => {
-        const url = `https://api-v2.intrinio.com/companies/search?query=${this.state.query}&api_key=${API_KEY}`;
-        return Axios
-            .get(url)
-            .then(res => {
-                if (res.data.companies.length > 0) {
-                    this.setState({ data: res.data.companies })
-                } else {
-                    this.setState({ data: [{ id: 'none', name: 'Nothing found' }] })
-                }
+        this.props.searchCompany(this.state.query);
+    }
 
-            })
-            .catch(err => console.log(err))
+    componentDidUpdate(prevProps) {
+        if (prevProps.search.search !== this.props.search.search) {
+            return this.setState({ data: this.props.search.search });
+        }
     }
 
     render() {
-        return (
-            <div>
-                <h2>Search Page</h2>
-                <Dflex position="center">
-                    <Search
-                        width="70%"
-                        type="text"
-                        onChange={(e) => this.setState({ query: e.target.value })}
-                    />
-                    <Button onClick={this.searchHandler}>Search</Button>
-                </Dflex>
+        const { error, pending, search, errMsg } = this.props.search;
+        if (error) {
+            return <ErrorMsg error={errMsg} />
+        } else {
+            return (
+                <div>
+                    {pending && <Pending />}
+                    <h2>Search Page</h2>
+                    <Dflex position="center">
+                        <Search
+                            width="70%"
+                            type="text"
+                            onChange={(e) => this.setState({ query: e.target.value })}
+                        />
+                        <Button onClick={this.searchHandler}>Search</Button>
+                    </Dflex>
 
-                <CardParent>
-                    {
-                        this.state.data.length > 0 ?
+                    <CardParent>
+                        {
+                            search &&
                             (
                                 this.state.data.map(item => {
                                     return <Card key={item.id}><Link to={`/companies/${item.ticker}`}>{item.name}</Link></Card>
                                 })
                             )
-                            :
-                            (
-                                null
-                            )
-                    }
-                </CardParent>
-            </div>
-        )
+
+                        }
+                    </CardParent>
+                </div>
+            )
+        }
+
     }
 }
 
-export default LandingPage;
+const mapStateToProps = state => {
+    return {
+        search: state.search
+    }
+}
+
+const mapdispachToProps = dispach => {
+    return {
+        searchCompany: (query) => dispach(searchCompany(query))
+    }
+}
+
+export default connect(mapStateToProps, mapdispachToProps)(SearchPage);

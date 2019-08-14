@@ -1,78 +1,60 @@
-import React, { Component } from 'react';
+import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import createComment from '../../../../store/actions/commentsActions';
 import CommentForm from './CommentsForm';
 import CommentItem from './CommentItem';
 
 
-class Comments extends Component {
-    state = {
-        id: Date.now(),
-        companyId: '',
-        comments: []
-    }
+const Comments = ({ id, ...props }) => {
+  const formHandler = useCallback((e, name, comment) => {
+    e.preventDefault();
 
-    componentDidMount() {
-        return this.initialDataSorting();
-    }
+    props.createComment({
+      id: Date.now(),
+      name,
+      comment,
+      companyId: id,
+    });
+  }, [id, props]);
 
-    initialDataSorting = () => {
-        const { id } = this.props;
+  const { comments } = props;
+  const data = comments.filter((item) => item.companyId === id);
 
-        const currentComments = this.props.comments.filter(item => item.companyId === id);
-        if (currentComments.length > 0) {
-            this.setState({ comments: currentComments, companyId: id });
-        } else {
-            this.setState({ companyId: id });
+
+  return (
+    <div>
+      <h3>Comments</h3>
+      <ul>
+        {
+          data.map((item, index) => (
+            <CommentItem key={item.id || index} name={item.name} comment={item.comment} />
+          ))
         }
+      </ul>
+      <p />
+      <CommentForm createComment={formHandler} />
+    </div>
+  );
+};
 
-    }
+Comments.propTypes = ({
+  id: PropTypes.string.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    comment: PropTypes.string,
+    companyId: PropTypes.String,
+  })).isRequired,
+  createComment: PropTypes.func.isRequired,
+});
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.comments !== this.props.comments) {
-            return this.initialDataSorting();
-        }
-    }
+const mapStateToProps = (state) => ({
+  comments: state.comments.comments,
+});
 
-    formHandler = (e, name, comment) => {
-        e.preventDefault();
-
-        this.props.createComment({
-            id: Date.now(),
-            name: name,
-            comment: comment,
-            companyId: this.state.companyId
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <h3>Comments</h3>
-                <ul>
-                    {
-                        this.state.comments.map((item, index) => {
-                            return <CommentItem key={item.id || index} name={item.name} comment={item.comment} />
-                        })
-                    }
-                </ul>
-                <p></p>
-                <CommentForm createComment={this.formHandler} />
-            </div>
-        )
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        comments: state.comments.comments
-    }
-}
-
-const mapDispachToProps = dispach => {
-    return {
-        createComment: (data) => dispach(createComment(data))
-    }
-}
+const mapDispachToProps = (dispach) => ({
+  createComment: (data) => dispach(createComment(data)),
+});
 
 export default connect(mapStateToProps, mapDispachToProps)(Comments);

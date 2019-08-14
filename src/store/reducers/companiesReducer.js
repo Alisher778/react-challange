@@ -40,9 +40,15 @@ const companyReducer = (state = initialState, action) => {
   }
 };
 
-const selectedCompanyReducer = (state = {}, action) => {
+const selectedCompanyState = {
+  selectedCompany: {},
+  pending: false,
+  error: null,
+  errMsg: '',
+};
+const selectedCompanyReducer = (state = selectedCompanyState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_ERROR: {
+    case actionTypes.SEARCH_COMPANY_ERROR: {
       return {
         ...state,
         pending: false,
@@ -50,7 +56,7 @@ const selectedCompanyReducer = (state = {}, action) => {
         errMsg: action.error,
       };
     }
-    case actionTypes.FETCH_PENDING: {
+    case actionTypes.SEARCH_COMPANY_PENDING: {
       return {
         ...state,
         pending: true,

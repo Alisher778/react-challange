@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import debounce from 'loadsh/debounce';
 import { fetchCompanies } from '../../store/actions/companiesActions';
-import { Card, CardParent, Loading, ErrorCard, Search } from '../../styles';
+import { Card, CardParent, Loading, Search } from '../../styles';
+import ErrorMsg from '../UI/ErrorMsg';
+import Pending from '../UI/Pending';
 
 
 class LandingPage extends Component {
@@ -42,9 +44,9 @@ class LandingPage extends Component {
         const { error, pending } = this.props;
 
         if (error) {
-            return <ErrorCard>Error message: {error} </ErrorCard>
+            return <ErrorMsg error={error} />
         } else if (pending) {
-            return <Loading><div></div> Loading ...</Loading>
+            return <Pending />
         } else {
             return (
                 <div>
@@ -71,9 +73,10 @@ class LandingPage extends Component {
                 </div>
             )
         }
-
-
     }
+
+
+
 }
 
 const mapStateToProps = state => {

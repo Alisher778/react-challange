@@ -16,11 +16,16 @@ const CommentForm = ({ createComment }) => {
   const formHandler = useCallback((e) => {
     e.preventDefault();
     if (name && comment) {
+      // If not empty shows border success color
       setEmptyName(false);
       setEmptyComment(false);
-
+      // Make empty input fileds after submition
+      setName('');
+      setComment('');
+      // Create comment
       createComment(e, name, comment);
     } else {
+      // If input is empty show error color
       setEmptyComment(!comment);
       setEmptyName(!name);
     }
@@ -32,8 +37,10 @@ const CommentForm = ({ createComment }) => {
         <InputField
           type="text"
           name="name"
-          onChange={(e) => setName(e.target.value)}
           empty={emptyName}
+          placeholder="Your name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </FormController>
       <FormController>
@@ -41,6 +48,8 @@ const CommentForm = ({ createComment }) => {
           name="comment"
           rows="10"
           empty={emptyComment}
+          value={comment}
+          placeholder="Type your comment here"
           onChange={(e) => setComment(e.target.value)}
         />
       </FormController>

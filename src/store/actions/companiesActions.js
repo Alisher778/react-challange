@@ -31,6 +31,15 @@ export const fetchCompanies = () => (dispach) => {
 
 // ****************** SELECTED COMPANY *************************
 
+export const fetchSelectedCompanyPending = () => ({
+  type: actionTypes.SELECTED_COMPANY_PENDING,
+});
+
+export const fetchSelectedCompanyError = (error) => ({
+  type: actionTypes.SEARCH_COMPANY_ERROR,
+  error,
+});
+
 
 export const selectedCompany = (data) => ({
   type: actionTypes.SELECTED_COMPANY,
@@ -39,7 +48,7 @@ export const selectedCompany = (data) => ({
 
 
 export const fetchSelectedCompanyDetails = (ticker) => (dispach) => {
-  dispach(fetchPending());
+  dispach(fetchSelectedCompanyPending());
 
   const companyDetailsURL = `https://api-v2.intrinio.com/companies/${ticker}?api_key=${API_KEY}`;
   return Axios
@@ -48,5 +57,5 @@ export const fetchSelectedCompanyDetails = (ticker) => (dispach) => {
       const { data } = res;
       return dispach(selectedCompany(data));
     })
-    .catch((err) => dispach(fetchError(err.message)));
+    .catch((err) => dispach(fetchSelectedCompanyError(err.message)));
 };

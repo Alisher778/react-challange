@@ -1,34 +1,34 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  news: [], pending: false, error: null, errMsg: '',
+  search: [], pending: false, error: null, errMsg: '',
 };
 
 
-const newsReduer = (state = initialState, action) => {
+const searchReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_NEWS_ERROR: {
+    case actionTypes.SEARCH_COMPANY_ERROR: {
       return {
         ...state,
-        news: [],
+        search: [],
         pending: false,
         error: true,
         errMsg: action.error,
       };
     }
-    case actionTypes.FETCH_NEWS_PENDING: {
+    case actionTypes.SEARCH_COMPANY_PENDING: {
       return {
         ...state,
-        news: [],
+        search: [],
         pending: true,
         error: null,
         errMsg: '',
       };
     }
-    case actionTypes.FETCH_NEWS: {
+    case actionTypes.SEARCH_COMPANY: {
       return {
         ...state,
-        news: action.data,
+        search: action.data,
         pending: false,
         error: null,
         errMsg: '',
@@ -42,4 +42,4 @@ const newsReduer = (state = initialState, action) => {
 };
 
 
-export default newsReduer;
+export default searchReducer;

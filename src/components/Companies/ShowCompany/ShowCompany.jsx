@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropsTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchSelectedCompanyDetails } from '../../../store/actions/companiesActions';
@@ -20,9 +21,7 @@ class ShowCompany extends Component {
     }
 
     render() {
-        const { error, pending, selectedCompany, news } = this.props;
-        console.log(news);
-
+        const { error, pending, selectedCompany } = this.props;
 
         if (error) {
             return <ErrorCard>Error message: {error} </ErrorCard>
@@ -77,12 +76,20 @@ class ShowCompany extends Component {
     }
 }
 
+ShowCompany.propsType = ({
+    selectedCompany: PropsTypes.object.isRequired
+})
+
+ShowCompany.defaultProps = ({
+    selectedCompany: {}
+})
+
 const mapStateToProps = state => {
     return {
         selectedCompany: state.selectedCompany.selectedCompany,
         pending: state.selectedCompany.pending,
         error: state.selectedCompany.error,
-        news: state.news.news
+        news: state.news.news,
     }
 }
 
