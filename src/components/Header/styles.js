@@ -27,6 +27,11 @@ const List = styled.li`
             color: #fff;
         }
     }
+    @media (max-width: 500px) {
+        & {
+            margin: 0 8px;
+        }
+    }
 `;
 
 const Ul = styled.ul`
