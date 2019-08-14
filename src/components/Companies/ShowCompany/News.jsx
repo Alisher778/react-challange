@@ -1,49 +1,48 @@
-import React, { Component } from 'react';
-import Axios from 'axios';
-import API_KEY from '../../../configs/keys/index';
-import { NewsWrapper } from './Elements';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FiClock } from 'react-icons/fi';
+import { NewsWrapper } from '../styles';
 
-class News extends Component {
-    state = { news: [] }
+const News = ({ data }) => (
+  <div>
+    <h3>Related news</h3>
+    <NewsWrapper>
+      <ul>
+        {
+          data.map((item) => (
+            <li key={item.id}>
+              <a href={item.url} target="_blank" rel="noopener noreferrer">
 
-    async componentDidMount() {
-        const { id } = this.props;
-        return Axios
-            .get(`https://api-v2.intrinio.com/companies/news?api_key=${API_KEY}`)
-            .then(res => {
-                const data = res.data.news.filter(item => item.company.ticker === id);
+                <h5>{item.title}</h5>
+                <div>
+                  <FiClock stroke="#4CAF50" />
+                  {' '}
+                  {new Date(item.publication_date).toLocaleDateString()}
+                </div>
+                <p>{`${item.summary.slice(0, 100)}...`}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </NewsWrapper>
+  </div>
+);
 
-                return this.setState({ news: data });
-            })
-            .catch(err => console.log(err))
-    }
+News.propTypes = ({
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    url: PropTypes.string,
+    title: PropTypes.string,
+    publication_date: PropTypes.Date,
+    summary: PropTypes.String,
+  })),
+});
 
-    render() {
-        return (
-            <div>
-                <h3>Related news</h3>
-                <NewsWrapper>
-                    <ul>
-                        {
-                            this.state.news.map((item) => {
-                                return (<li key={item.id}>
-                                    <a href={item.url} target="_blank" rel="noopener noreferrer">
-
-                                        <h5>{item.title}</h5>
-                                        <div><FiClock stroke="#4CAF50" /> {new Date(item.publication_date).toLocaleDateString()}</div>
-                                        <p>{item.summary.slice(0, 300) + '...'}</p>
-                                    </a>
-                                </li>
-                                )
-                            })
-                        }
-                    </ul>
-                </NewsWrapper>
-
-            </div>
-        )
-    }
-}
+News.defaultProps = ({
+  data: [{
+    id: '', url: '', title: '', publication_date: '', summary: '',
+  }],
+});
 
 export default News;

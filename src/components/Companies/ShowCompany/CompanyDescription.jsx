@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Wrapper } from './Elements';
+import PropTypes from 'prop-types';
+import { Wrapper } from '../styles';
 import { Button } from '../../../styles/index';
 
-function Description({ shortDescription, long }) {
+function Description({ short, long }) {
   // Declare a new state variable, which we'll call "count"
   const [show, setShow] = useState(true);
 
@@ -10,7 +11,7 @@ function Description({ shortDescription, long }) {
     <div>
       <h4>Discription</h4>
       <div style={{ display: show === false ? 'block' : 'none' }}>
-        <p>{shortDescription}</p>
+        <p>{short}</p>
 
         <Wrapper>
           <Button width="120px" fontSize="16px;" onClick={() => setShow(true)}>Read Less</Button>
@@ -30,5 +31,9 @@ function Description({ shortDescription, long }) {
   );
 }
 
+Description.propTypes = ({
+  short: PropTypes.string.isRequired,
+  long: PropTypes.string.isRequired,
+});
 
 export default Description;

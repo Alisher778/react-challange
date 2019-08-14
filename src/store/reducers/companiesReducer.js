@@ -1,9 +1,4 @@
-import {
-  FETCH_COMPANIES,
-  FETCH_COMPANIES_ERROR,
-  FETCH_COMPANIES_PENDING,
-  SELECTED_COMPANY,
-} from '../actions/actionTypes';
+import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
   companies: [], pending: false, error: null, errMsg: '', selectedCompany: {},
@@ -12,7 +7,7 @@ const initialState = {
 
 const companyReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_COMPANIES_ERROR: {
+    case actionTypes.FETCH_ERROR: {
       return {
         ...state,
         companies: [],
@@ -21,7 +16,7 @@ const companyReducer = (state = initialState, action) => {
         errMsg: action.error,
       };
     }
-    case FETCH_COMPANIES_PENDING: {
+    case actionTypes.FETCH_PENDING: {
       return {
         ...state,
         companies: [],
@@ -30,7 +25,7 @@ const companyReducer = (state = initialState, action) => {
         errMsg: '',
       };
     }
-    case FETCH_COMPANIES: {
+    case actionTypes.FETCH_COMPANIES: {
       return {
         ...state,
         companies: action.data,
@@ -47,7 +42,7 @@ const companyReducer = (state = initialState, action) => {
 
 const selectedCompanyReducer = (state = {}, action) => {
   switch (action.type) {
-    case FETCH_COMPANIES_ERROR: {
+    case actionTypes.FETCH_ERROR: {
       return {
         ...state,
         pending: false,
@@ -55,7 +50,7 @@ const selectedCompanyReducer = (state = {}, action) => {
         errMsg: action.error,
       };
     }
-    case FETCH_COMPANIES_PENDING: {
+    case actionTypes.FETCH_PENDING: {
       return {
         ...state,
         pending: true,
@@ -63,7 +58,7 @@ const selectedCompanyReducer = (state = {}, action) => {
         errMsg: '',
       };
     }
-    case SELECTED_COMPANY: {
+    case actionTypes.SELECTED_COMPANY: {
       return {
         ...state,
         pending: false,

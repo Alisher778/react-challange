@@ -1,7 +1,7 @@
-import { CREATE_COMMENT } from './actionTypes';
+import * as actionTypes from './actionTypes';
 
 const createComment = (data) => ({
-  type: CREATE_COMMENT,
+  type: actionTypes.CREATE_COMMENT,
   data,
 });
 

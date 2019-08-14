@@ -1,25 +1,20 @@
 import Axios from 'axios';
-import {
-  FETCH_COMPANIES,
-  FETCH_COMPANIES_ERROR,
-  FETCH_COMPANIES_PENDING,
-  SELECTED_COMPANY,
-} from './actionTypes';
+import * as actionTypes from './actionTypes';
 import API_KEY from '../../configs/keys';
 
 const companiesUrl = `https://api.intrinio.com/companies?api_key=${API_KEY}`;
 
 export const fetchPending = () => ({
-  type: FETCH_COMPANIES_PENDING,
+  type: actionTypes.FETCH_PENDING,
 });
 
 export const fetchError = (error) => ({
-  type: FETCH_COMPANIES_ERROR,
+  type: actionTypes.FETCH_ERROR,
   error,
 });
 
 export const fetchSuccess = (data) => ({
-  type: FETCH_COMPANIES,
+  type: actionTypes.FETCH_COMPANIES,
   data,
 });
 
@@ -38,7 +33,7 @@ export const fetchCompanies = () => (dispach) => {
 
 
 export const selectedCompany = (data) => ({
-  type: SELECTED_COMPANY,
+  type: actionTypes.SELECTED_COMPANY,
   data,
 });
 
