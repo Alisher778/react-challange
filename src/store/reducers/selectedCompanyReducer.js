@@ -1,36 +1,37 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-  companies: [], pending: false, error: null, errMsg: '', selectedCompany: {},
+  selectedCompany: {},
+  pending: false,
+  error: null,
+  errMsg: '',
 };
 
-const companyReducer = (state = initialState, action) => {
+const selectedCompanyReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_ERROR: {
+    case actionTypes.SEARCH_COMPANY_ERROR: {
       return {
         ...state,
-        companies: [],
         pending: false,
         error: true,
         errMsg: action.payload,
       };
     }
-    case actionTypes.FETCH_PENDING: {
+    case actionTypes.SEARCH_COMPANY_PENDING: {
       return {
         ...state,
-        companies: [],
         pending: true,
         error: null,
         errMsg: '',
       };
     }
-    case actionTypes.FETCH_COMPANIES: {
+    case actionTypes.SELECTED_COMPANY: {
       return {
         ...state,
-        companies: action.payload,
         pending: false,
         error: null,
         errMsg: '',
+        selectedCompany: { ...action.payload },
       };
     }
     default: {
@@ -39,4 +40,5 @@ const companyReducer = (state = initialState, action) => {
   }
 };
 
-export default companyReducer;
+
+export default selectedCompanyReducer;

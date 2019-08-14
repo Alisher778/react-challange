@@ -7,10 +7,12 @@ import Companies from '../components/Companies/Companies';
 import ShowCompany from '../components/Companies/ShowCompany/ShowCompany';
 import LandingPage from '../components/LandingPage/LandingPage';
 import Search from '../components/Search/Search';
+import ErrorPage from '../components/ErrorPage/ErrorPage';
 
 export default [
   <Route key="landingPage" path="/" exact component={LandingPage} />,
   <Route key="companiesPage" path="/companies" exact component={Companies} />,
   <Route key="showCompanyPage" path="/companies/:ticker" exact component={ShowCompany} />,
   <Route key="searchPage" path="/search" exact component={Search} />,
+  <Route key="searchPage" path="*" component={ErrorPage} />,
 ];

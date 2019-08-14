@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import PropsTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchSelectedCompanyDetails } from '../../../store/actions/companiesActions';
+import { fetchSelectedCompanyDetails } from '../../../store/actions/selectedCompanyActions';
 import { fetchNews } from '../../../store/actions/newsActions';
 import Descriptions from './CompanyDescription';
 import Comments from './Comments/Comments';
 import News from './News';
 import { Wrapper } from '../styles';
-import { Loading, ErrorCard } from '../../../styles/index';
+import ErrorMsg from '../../UI/ErrorMsg';
+import Pending from '../../UI/Pending';
 
 
 class ShowCompany extends Component {
@@ -21,12 +22,12 @@ class ShowCompany extends Component {
     }
 
     render() {
-        const { error, pending, selectedCompany } = this.props;
+        const { error, errMsg, pending, selectedCompany } = this.props;
 
         if (error) {
-            return <ErrorCard>Error message: {error} </ErrorCard>
+            return <ErrorMsg error={errMsg} />
         } else if (pending) {
-            return <Loading><div></div> Loading ...</Loading>
+            return <Pending />
         } else {
             return (
                 <div>
@@ -89,6 +90,7 @@ const mapStateToProps = state => {
         selectedCompany: state.selectedCompany.selectedCompany,
         pending: state.selectedCompany.pending,
         error: state.selectedCompany.error,
+        errMsg: state.selectedCompany.errMsg,
         news: state.news.news,
     }
 }

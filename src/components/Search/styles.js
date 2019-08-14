@@ -17,4 +17,11 @@ const Search = styled.input`
     box-shadow: none;
 `;
 
-export { Search, Container };
+const Result = styled.div`
+   width: 100%;
+   margin: 30px;
+   text-align: center;
+   font-size: 26px;
+`;
+
+export { Search, Container, Result };

@@ -13,7 +13,7 @@ const searchReducer = (state = initialState, action) => {
         search: [],
         pending: false,
         error: true,
-        errMsg: action.error,
+        errMsg: action.payload,
       };
     }
     case actionTypes.SEARCH_COMPANY_PENDING: {
@@ -28,7 +28,7 @@ const searchReducer = (state = initialState, action) => {
     case actionTypes.SEARCH_COMPANY: {
       return {
         ...state,
-        search: action.data,
+        search: action.payload,
         pending: false,
         error: null,
         errMsg: '',

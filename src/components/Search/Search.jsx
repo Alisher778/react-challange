@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { searchCompany } from '../../store/actions/searchActions';
 import { Dflex, Button, CardParent, Card } from '../../styles/index';
-import { Search, Container } from './styles';
+import { Search, Container, Result } from './styles';
 import ErrorMsg from '../UI/ErrorMsg';
 import Pending from '../UI/Pending';
 
@@ -21,10 +21,13 @@ class SearchPage extends Component {
         }
     }
 
+    componentWillUnmount() {
+        return window.localStorage.clear();
+    }
+
+
     render() {
         const { error, pending, search, errMsg } = this.props.search;
-        console.log(pending);
-
         if (error) {
             return <ErrorMsg error={errMsg} />
         } else {
@@ -46,7 +49,12 @@ class SearchPage extends Component {
                             search &&
                             (
                                 this.state.data.map(item => {
-                                    return <Card key={item.id}><Link to={`/companies/${item.ticker}`}>{item.name}</Link></Card>
+                                    if (item.id !== 'notFound') {
+                                        return <Card key={item.id}><Link to={`/companies/${item.ticker}`}>{item.name}</Link></Card>
+
+                                    } else {
+                                        return <Result key={item.id}>{item.name} by "{this.state.query}" name</Result>
+                                    }
                                 })
                             )
 

@@ -10,12 +10,12 @@ export const fetchPending = () => ({
 
 export const fetchError = (error) => ({
   type: actionTypes.SEARCH_COMPANY_ERROR,
-  error,
+  payload: error,
 });
 
 export const fetchSuccess = (data) => ({
   type: actionTypes.SEARCH_COMPANY,
-  data,
+  payload: data,
 });
 
 export const searchCompany = (query) => (dispach) => {
@@ -24,6 +24,9 @@ export const searchCompany = (query) => (dispach) => {
     .get(companiesUrl + query)
     .then((res) => {
       const { data: { companies } } = res;
+      if (companies.length === 0) {
+        return dispach(fetchSuccess([{ name: 'No company found', id: 'notFound' }]));
+      }
       return dispach(fetchSuccess(companies));
     })
     .catch((err) => dispach(fetchError(err.message)));

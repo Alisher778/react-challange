@@ -10,7 +10,7 @@ const commentsReduer = (state = initialState, action) => {
     case CREATE_COMMENT: {
       return {
         ...state,
-        comments: [...state.comments, action.data],
+        comments: [...state.comments, action.payload],
         pending: false,
         error: true,
         errMsg: action.error,

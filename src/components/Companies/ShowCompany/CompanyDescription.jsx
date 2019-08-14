@@ -32,8 +32,13 @@ function Description({ short, long }) {
 }
 
 Description.propTypes = ({
-  short: PropTypes.string.isRequired,
-  long: PropTypes.string.isRequired,
+  short: PropTypes.string,
+  long: PropTypes.string,
+});
+
+Description.defaultProps = ({
+  short: '',
+  long: '',
 });
 
 export default Description;

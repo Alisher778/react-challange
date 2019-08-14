@@ -4,10 +4,11 @@ import {
 import persistState from 'redux-localstorage';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import { companyReducer, selectedCompanyReducer } from './reducers/companiesReducer';
+import companyReducer from './reducers/companiesReducer';
 import commentsReduer from './reducers/commentsReducer';
 import newsReducer from './reducers/newsReducer';
 import searchReducer from './reducers/searchReducer';
+import selectedCompanyReducer from './reducers/selectedCompanyReducer';
 
 const enhancer = compose(
   applyMiddleware(thunk, logger),

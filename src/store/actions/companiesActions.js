@@ -10,12 +10,12 @@ export const fetchPending = () => ({
 
 export const fetchError = (error) => ({
   type: actionTypes.FETCH_ERROR,
-  error,
+  payload: error,
 });
 
 export const fetchSuccess = (data) => ({
   type: actionTypes.FETCH_COMPANIES,
-  data,
+  payload: data,
 });
 
 export const fetchCompanies = () => (dispach) => {
@@ -27,35 +27,4 @@ export const fetchCompanies = () => (dispach) => {
       return dispach(fetchSuccess(data));
     })
     .catch((err) => dispach(fetchError(err.message)));
-};
-
-// ****************** SELECTED COMPANY *************************
-
-export const fetchSelectedCompanyPending = () => ({
-  type: actionTypes.SELECTED_COMPANY_PENDING,
-});
-
-export const fetchSelectedCompanyError = (error) => ({
-  type: actionTypes.SEARCH_COMPANY_ERROR,
-  error,
-});
-
-
-export const selectedCompany = (data) => ({
-  type: actionTypes.SELECTED_COMPANY,
-  data,
-});
-
-
-export const fetchSelectedCompanyDetails = (ticker) => (dispach) => {
-  dispach(fetchSelectedCompanyPending());
-
-  const companyDetailsURL = `https://api-v2.intrinio.com/companies/${ticker}?api_key=${API_KEY}`;
-  return Axios
-    .get(companyDetailsURL)
-    .then((res) => {
-      const { data } = res;
-      return dispach(selectedCompany(data));
-    })
-    .catch((err) => dispach(fetchSelectedCompanyError(err.message)));
 };
