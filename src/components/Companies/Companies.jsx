@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import debounce from 'loadsh/debounce';
 import { fetchCompanies } from '../../store/actions/companiesActions';
@@ -90,9 +91,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispachToProps = dispach => {
-    return {
-        fetchCompanies: () => dispach(fetchCompanies())
-    }
+    return bindActionCreators({ fetchCompanies }, dispach)
 }
 
 

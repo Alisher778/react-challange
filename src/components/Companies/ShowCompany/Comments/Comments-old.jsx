@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import createComment from '../../../../store/actions/commentsActions';
 import CommentForm from './CommentsForm';
@@ -70,9 +71,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispachToProps = dispach => {
-    return {
-        createComment: (data) => dispach(createComment(data))
-    }
+    return bindActionCreators({ createComment }, dispach)
+    // return {
+    //     createComment: (data) => dispach(createComment(data))
+    // }
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(Comments);

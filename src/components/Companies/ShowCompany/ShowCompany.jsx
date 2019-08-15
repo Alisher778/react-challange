@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropsTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchSelectedCompanyDetails } from '../../../store/actions/selectedCompanyActions';
@@ -96,10 +97,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispachToProps = dispach => {
-    return {
-        fetchSelectedCompanyDetails: (ticker) => dispach(fetchSelectedCompanyDetails(ticker)),
-        fetchNews: (ticker) => dispach(fetchNews(ticker))
-    }
+    return bindActionCreators({ fetchSelectedCompanyDetails, fetchNews }, dispach)
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(withRouter(ShowCompany));

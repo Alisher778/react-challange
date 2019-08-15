@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import createComment from '../../../../store/actions/commentsActions';
@@ -53,8 +54,8 @@ const mapStateToProps = (state) => ({
   comments: state.comments.comments,
 });
 
-const mapDispachToProps = (dispach) => ({
-  createComment: (data) => dispach(createComment(data)),
-});
+const mapDispachToProps = (dispach) => (
+  bindActionCreators({ createComment }, dispach)
+);
 
 export default connect(mapStateToProps, mapDispachToProps)(Comments);

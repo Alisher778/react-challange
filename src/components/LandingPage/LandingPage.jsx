@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -66,10 +67,7 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispachToProps = dispach => {
-    return {
-        fetchCompanies: () => dispach(fetchCompanies())
-    }
-}
+const mapDispachToProps = dispach => bindActionCreators({ fetchCompanies }, dispach)
+
 
 export default connect(mapStateToProps, mapDispachToProps)(LandingPage);
